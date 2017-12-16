@@ -1,0 +1,117 @@
+    <div class="container-fluid">
+      <div class="row">
+        <main role="main" class="col-sm-12 ml-sm-auto col-md-12">
+          <div class="container-fluid inner-header">
+            <a class="header-link" href="{{ tw_site_url }}"><h1>{{ text_city_list|e }}</h1></a>
+             <div class="pull-right">    			
+    	      <button id="button-filter" class="btn btn-primary" type="button" title="{{ text_filter }}" data-tooltip="tooltip" data-toggle="tooltip"><i class="fa fa-filter"></i></button>
+    	      <button type="button" id="button-reset" data-tooltip="tooltip" title="{{ text_reset }}" data-tooltip="tooltip" data-toggle="tooltip"  class="btn btn-default"><i class="fa fa-remove"></i></button>
+    	     </div>
+          </div>
+          <div class="jumbotron">
+		<form>
+		  <div class="row">
+		    <div class="col-md-3">
+			<div class="form-group">
+			    <input value="{{ filter_city_name|e('html_attr') }}" type="text" class="form-control" name="filter-city-name" id="filter-city-name" placeholder="{{ column_city_name }}">
+			</div>
+		    </div>
+		    <div class="col-md-3">
+			<div class="form-group">
+			    <input value="{{ filter_country_name|e('html_attr') }}"  type="text" class="form-control" name="filter-country-name" id="filter-country-name" placeholder="{{ column_country_name }}">
+			</div>
+		    </div>
+		    <div class="col-md-3">
+			<div class="form-group">
+			    <input value="{{ phfilter_continent|e('html_attr') }}"  type="text" class="form-control" name="filter-continent"  id="filter-continent" placeholder="{{ column_continent }}">
+			</div>
+		    </div>
+		    <div class="col-md-3">
+			<div class="form-group">
+			    <input value="{{ filter_city_pop|e('html_attr') }}"  type="text" class="form-control" name="filter-city-pop"  id="filter-city-pop" placeholder="{{ column_city_pop }}">
+			</div>
+		    </div>
+		  </div>
+		</form>
+	  </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+            	    <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+            	    <td class="text-left">
+                	{% if sort == 'city_name' %}
+                		<a href="{{ sort_city_name }}" class="{{ order|lower }}">{{ column_city_name }}</a>
+                	{% else %}
+                		<a href="{{ sort_city_name }}">{{ column_city_name }}</a>
+                	{% endif %}
+            	    </td>
+            	    <td class="text-left">
+                	{% if sort == 'country_name' %}
+                		<a href="{{ sort_country_name }}" class="{{ order|lower }}">{{ column_country_name }}</a>
+                	{% else %}
+                		<a href="{{ sort_country_name }}>{{ column_country_name }}</a>
+                	{% endif %}
+            	    </td>
+            	    <td class="text-left">
+                	{% if sort == 'continent' %}
+                		<a href="{{ sort_continent }}" class="{{ order|lower }}">{{ column_continent }}</a>
+                	{% else %}
+                		<a href="{{ sort_continent }}">{{ column_continent }}</a>
+                	{% endif %}
+            	    </td>
+            	    <td class="text-left">
+                	{% if sort == 'city_pop' %}
+                		<a href="{{ sort_city_pop }}" class="{{ order|lower }}">{{ column_city_pop }}</a>
+                	{% else %}
+                		<a href="{{ sort_city_pop }}">{{ column_city_pop }}</a>
+                	{% endif %}
+            	    </td>
+            	    <td class="text-left">
+                	{% if sort == 'country_area' %}
+                		<a href="{{ sort_country_area }}" class="{{ order|lower }}">{{ column_country_area }}</a>
+                	{% else %}
+                		<a href="{{ sort_country_area }}">{{ column_country_area }}</a>
+                	{% endif %}
+            	    </td>
+            	    <td class="text-left">
+                	{% if sort == 'indep_year' %}
+                		<a href="{{ sort_indep_year }}" class="{{ order|lower }}">{{ column_indep_year }}</a>
+                	{% else %}
+                		<a href="{{ sort_indep_year }}">{{ column_indep_year }}</a>
+                	{% endif %}
+            	    </td>
+            	</tr>    
+    	      </thead>
+              <tbody>
+                {%if cities %}
+            	 {% for ci in cities %}
+            	    <tr>
+            		<td class="text-center"><input type="checkbox" name="selected[]" value="{{ ci.ID|e('html_attr') }}" /></td>
+            		<td>{{ ci.city_name|e }}</td>
+            		<td>{{ ci.country_name|e }}</td>
+            		<td>{{ ci.continent|e }}</td>
+            		<td>{{ ci.city_pop|e }}</td>
+            		<td>{{ ci.country_area|e }}</td>
+            		<td>{{ ci.indep_year|e }}</td>
+            	    </tr>
+        	 {% endfor %}
+        	{% else %}
+            		<tr>
+                	    <td class="text-center" colspan="7">{{ text_no_result }}</td>
+            		</tr>
+            	{% endif %}
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+      <div class="row">
+	<div class="col-md-6 text-left">
+	    {{ pagination|raw }}
+	</div>
+	<div class="col-md-6 text-right">
+	    {{ results|raw }}
+	</div>
+      </div>
+      

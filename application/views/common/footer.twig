@@ -1,0 +1,51 @@
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/dashboard.js"></script>
+<script type="text/javascript"><!--
+$('#button-filter').on('click', function() {
+	var url = '{{ tw_site_url|raw }}';
+
+	var filter_city_name = $('input[name=\'filter-city-name\']').val();
+
+	if (filter_city_name) {
+		url += '&filter_city_name=' + fixedEncodeURIComponent(filter_city_name);
+	}
+	
+	var filter_country_name = $('input[name=\'filter-country-name\']').val();
+
+	if (filter_country_name) {
+		url += '&filter_country_name=' + fixedEncodeURIComponent(filter_country_name);
+	}
+	
+	var filter_continent = $('input[name=\'filter-continent\']').val();
+
+	if (filter_continent) {
+		url += '&filter_continent=' + fixedEncodeURIComponent(filter_continent);
+	}
+	
+	var filter_city_pop = $('input[name=\'filter-city-pop\']').val();
+	
+	if (filter_city_pop) {
+		url += '&filter_city_pop=' + fixedEncodeURIComponent(filter_city_pop);
+	}
+	
+	location = url;
+});
+
+//--></script>
+<script type="text/javascript"><!--
+// reset button clears values
+$('#button-reset').on('click', function() {
+    $('input').val('');
+});
+//--></script>
+<script type="text/javascript"><!--
+function fixedEncodeURIComponent (str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+    return '%' + c.charCodeAt(0).toString(16);
+  });
+};
+//--></script>
+  </body>
+</html>
